@@ -1,0 +1,91 @@
+1
+00:00:00,600 --> 00:00:05,940
+Hệ thống kiểm soát lũ mất quyền điều khiển. Chúng ta còn sáu phút.
+
+2
+00:00:06,599 --> 00:00:09,781
+Tôi sẽ tìm đường lên tháp trung tâm.
+
+3
+00:00:14,599 --> 00:00:17,758
+Linh, chúng phát hiện ra cô rồi.
+
+4
+00:00:28,600 --> 00:00:32,939
+Lệnh ưu tiên: thu hồi thiết bị. Không được để dữ liệu thoát ra ngoài.
+
+5
+00:00:33,600 --> 00:00:36,518
+Vậy thì phải nhanh hơn chúng.
+
+6
+00:01:06,599 --> 00:01:09,205
+Cầu phía trước đang đóng!
+
+7
+00:01:33,599 --> 00:01:37,285
+Không còn đường khác. Bám chắc!
+
+8
+00:01:49,599 --> 00:01:54,533
+Độ cao nguy hiểm. Tôi không thích phép tính này!
+
+9
+00:02:14,599 --> 00:02:17,939
+Giao khóa ra. Thành phố đã thuộc quyền kiểm soát.
+
+10
+00:02:28,599 --> 00:02:32,165
+Người dân mới là chủ của thành phố này!
+
+11
+00:02:49,599 --> 00:02:53,117
+Lối xuống tàu điện, ngay bên phải!
+
+12
+00:03:14,599 --> 00:03:17,939
+Cảnh báo: mực nước tiếp tục dâng.
+
+13
+00:03:28,599 --> 00:03:32,262
+K-7! Trả lời tôi!
+
+14
+00:03:33,599 --> 00:03:38,893
+Bộ nguồn bị hỏng. Nhưng tôi vẫn còn một lần truyền tin.
+
+15
+00:03:49,599 --> 00:03:52,566
+Tôi sẽ không bỏ cậu ở đây.
+
+16
+00:04:14,599 --> 00:04:17,939
+Một mình cô không thể chống lại cả hệ thống.
+
+17
+00:04:33,600 --> 00:04:36,422
+Tôi không đến đây một mình.
+
+18
+00:04:42,600 --> 00:04:48,939
+Linh, khóa này không dùng để cứu người. Nó dùng để khóa quyền điều khiển.
+
+19
+00:05:00,600 --> 00:05:04,742
+Vậy thì chúng ta sẽ trao quyền cho tất cả mọi người.
+
+20
+00:05:06,600 --> 00:05:09,590
+Giao thức phân tán được kích hoạt.
+
+21
+00:05:18,600 --> 00:05:23,414
+Cửa thoát hiểm mở rồi! Mọi người đi theo tôi!
+
+22
+00:05:42,600 --> 00:05:45,566
+Tín hiệu đã tới toàn thành phố.
+
+23
+00:05:49,600 --> 00:05:52,806
+Không ai cứu được thành phố một mình.
