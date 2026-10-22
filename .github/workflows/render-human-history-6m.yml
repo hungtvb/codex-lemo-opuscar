@@ -1,0 +1,183 @@
+name: Produce Human History Documentary (6m, Vietnamese narration)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'films/human-history-6m/**'
+      - '.github/workflows/render-human-history-6m.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: film-human-history-6m
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 85
+    steps:
+      - name: Checkout film project
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Install FFmpeg, Vietnamese-font support, offline voice fallback
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg python3-venv espeak-ng fonts-dejavu-core
+
+      - name: Install the actual upstream Lemo-Opuscar renderer
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://github.com/lemomo-ai/lemo-opuscar.git "$HOME/lemo-opuscar"
+          git -C "$HOME/lemo-opuscar" sparse-checkout set core plugin tools styles/watercolor
+          test -f "$HOME/lemo-opuscar/core/render/video.mjs"
+          git -C "$HOME/lemo-opuscar" rev-parse HEAD | tee upstream-sha-human-history.txt
+          sh "$HOME/lemo-opuscar/plugin/skills/lemo-opuscar/scripts/setup.sh" deps
+          if command -v uv; then
+            uv pip install --python "$HOME/lemo-opuscar/.venv/bin/python" "edge-tts>=7,<9" || true
+          else
+            "$HOME/lemo-opuscar/.venv/bin/python" -m pip install "edge-tts>=7,<9" || true
+          fi
+
+      - name: Synthesize 12 Vietnamese narration tracks and original score
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/human-history-6m"
+          "$HOME/lemo-opuscar/.venv/bin/python" "$FILM/voice.py"
+          "$HOME/lemo-opuscar/.venv/bin/python" "$FILM/music.py"
+          ffmpeg -y -v error -i "$FILM/out/narration.wav" -i "$FILM/out/music.wav" \
+            -filter_complex "[0:a]volume=1.65,acompressor=threshold=-19dB:ratio=2:attack=20:release=160[voice];[1:a]volume=0.55[score];[voice][score]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.90,aresample=24000[mix]" \
+            -map "[mix]" -ar 24000 -ac 1 -c:a pcm_s16le "$FILM/out/mix.wav"
+          ffprobe -hide_banner "$FILM/out/mix.wav" | tail -8
+
+      - name: Render 12 styleframes with upstream browser engine
+        run: |
+          set -euo pipefail
+          cd "$HOME/lemo-opuscar"
+          node core/render/still.mjs "$GITHUB_WORKSPACE/films/human-history-6m" \
+            15 45 75 105 135 165 195 225 255 285 315 345 \
+            --size 1280x720
+          ls -lah "$GITHUB_WORKSPACE/films/human-history-6m/stills"
+
+      - name: Render 360-second documentary through Lemo-Opuscar Playwright
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/human-history-6m"
+          cd "$HOME/lemo-opuscar"
+          node core/render/video.mjs "$FILM" \
+            --fps 24 --workers 4 --size 1280x720 \
+            --out "$FILM/out/video.mp4"
+
+      - name: Master documentary soundtrack and video
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/human-history-6m"
+          cd "$HOME/lemo-opuscar"
+          if sh core/render/mux.sh "$FILM/out/video.mp4" "$FILM/out/mix.wav" \
+            "$FILM/out/master.mp4" 24 0; then
+            echo "Upstream Lemo-Opuscar audio mastering succeeded"
+          else
+            echo "Upstream mux.sh failed: verify PCM and use checked fallback"
+            python3 - "$FILM/out/mix.wav" <<'PY'
+          import sys,wave
+          with wave.open(sys.argv[1],"rb") as f:
+              assert f.getframerate()==24000 and f.getnchannels()==1
+              assert abs(f.getnframes()/f.getframerate()-360)<.2
+              frames=f.readframes(f.getnframes())
+              assert len(frames)==f.getnframes()*f.getsampwidth()
+          print('Independent PCM validation passed')
+          PY
+            ffmpeg -hide_banner -v error -i "$FILM/out/mix.wav" -f null -
+            ffmpeg -y -loglevel error -i "$FILM/out/video.mp4" \
+              -i "$FILM/out/mix.wav" \
+              -filter_complex "[1:a]loudnorm=I=-14:TP=-1.2:LRA=11[a]" \
+              -map 0:v:0 -map "[a]" -c:v copy -c:a aac -b:a 192k \
+              -movflags +faststart -shortest "$FILM/out/master.mp4"
+            echo "Used documented FFmpeg audio mastering fallback"
+          fi
+
+      - name: Compress distributable MP4 and run objective quality tests
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/human-history-6m"
+          mkdir -p dist
+          ffmpeg -y -loglevel error -i "$FILM/out/master.mp4" \
+            -map 0:v:0 -map 0:a:0 \
+            -c:v libx264 -preset medium -crf 24 -maxrate 1700k -bufsize 3400k \
+            -pix_fmt yuv420p -r 24 -c:a aac -b:a 128k \
+            -movflags +faststart \
+            -metadata title="Lịch sử loài người — 6 phút" \
+            dist/human-history-6m.mp4
+          ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate \
+            -of json dist/human-history-6m.mp4 | tee dist/human-history-6m-meta.json
+          "$HOME/lemo-opuscar/.venv/bin/python" - <<'PY'
+          import json,glob,os
+          from PIL import Image,ImageStat,ImageOps,ImageDraw,ImageFont
+          from pathlib import Path
+          base=Path('films/human-history-6m')
+          o=json.loads(Path('dist/human-history-6m-meta.json').read_text())
+          v=[x for x in o['streams'] if x.get('codec_name')=='h264']
+          a=[x for x in o['streams'] if x.get('codec_name')=='aac']
+          assert v and a,'Video + Vietnamese narration are required'
+          assert v[0]['width']==1280 and v[0]['height']==720
+          assert v[0]['r_frame_rate']=='24/1'
+          assert abs(float(o['format']['duration'])-360)<.5
+          assert int(o['format']['size'])<95*1024*1024,'GitHub file too large'
+          stills=sorted((base/'stills').glob('*.jpg'))
+          assert len(stills)==12,('Expected 12 diagnostic storyframes',len(stills))
+          contact=Image.new('RGB',(960,3*180),(24,32,43))
+          for k,p in enumerate(stills):
+              img=Image.open(p).convert('RGB')
+              st=ImageStat.Stat(img.resize((160,90)))
+              contrast=sum(st.stddev)/3
+              assert contrast>9,('Blank scene',p,contrast)
+              img=ImageOps.fit(img,(320,180))
+              contact.paste(img,((k%3)*320,(k//3)*135))
+              print('SCENE',k,p.name,'contrast',round(contrast,1))
+          # 4 rows x 3 stills: regenerate correctly without overlap
+          contact=Image.new('RGB',(960,720),(24,32,43))
+          for k,p in enumerate(stills):
+              contact.paste(ImageOps.fit(Image.open(p).convert('RGB'),(320,180)),((k%3)*320,(k//3)*180))
+          contact.save(base/'out/contact-sheet.jpg',quality=90)
+          voice=json.loads((base/'out/voice-report.json').read_text())
+          assert abs(voice['duration']-360)<.5
+          assert len(voice['chapters'])==12
+          report={'runtime_seconds':float(o['format']['duration']),
+                  'voice_provider':voice['provider'],
+                  'render':'upstream Lemo-Opuscar core/render/video.mjs',
+                  'chapter_count':12,'checks':'passed',
+                  'source':'Original original illustrated historical documentary',
+                  'video_bytes':int(o['format']['size'])}
+          Path('dist/human-history-6m-qc.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print('QC report',report)
+          PY
+
+      - name: Upload video, voice QC, styleframes and source treatment
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: human-history-6m-film
+          path: |
+            dist/human-history-6m.mp4
+            dist/human-history-6m-meta.json
+            dist/human-history-6m-qc.json
+            films/human-history-6m/out/contact-sheet.jpg
+            films/human-history-6m/out/voice-report.json
+            films/human-history-6m/stills/*.jpg
+            films/human-history-6m/story.json
+            upstream-sha-human-history.txt
+          retention-days: 30
+
+      - name: Publish validated documentary to GitHub
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/human-history-6m.mp4 dist/human-history-6m-meta.json dist/human-history-6m-qc.json
+          git commit -m "film(history): publish verified six-minute Vietnamese narrated documentary [skip ci]"
+          git push origin HEAD:main
