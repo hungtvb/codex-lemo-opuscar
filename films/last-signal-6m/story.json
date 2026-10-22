@@ -1,7 +1,7 @@
 {
   "film": "LỆNH CUỐI",
   "englishTitle": "LAST SIGNAL",
-  "logline": "Một người đưa tin và drone đồng hành phải phá vỡ hệ thống kiểm soát lũ trước khi thành phố chìm trong nước.",
+  "logline": "Một kỹ sư cứu hộ và drone đồng hành phải giành lại hệ thống cửa ngăn lũ khỏi lực lượng tự động, trước khi thành phố bị nhấn chìm.",
   "duration": 360,
   "fps": 24,
   "shots": [
@@ -30,10 +30,10 @@
       "stage": "street",
       "action": "run",
       "camera": "track",
-      "description": "Người đưa tin lao qua màn mưa",
+      "description": "Linh, kỹ sư cứu hộ, băng qua đường ngập",
       "dialogue": {
         "speaker": "linh",
-        "text": "Tôi sẽ mang khóa tới tháp trung tâm.",
+        "text": "Tôi sẽ tìm đường lên tháp trung tâm.",
         "start": 6.6
       }
     },
@@ -113,10 +113,10 @@
       "actName": "TÍN HIỆU ĐỨT",
       "t": 49,
       "duration": 11,
-      "stage": "garage",
-      "action": "bike",
+      "stage": "platform",
+      "action": "escape",
       "camera": "wide",
-      "description": "Khởi động xe điện"
+      "description": "Băng xuống ga tàu cứu hộ"
     },
     {
       "id": 8,
@@ -124,10 +124,10 @@
       "actName": "CUỘC TRUY ĐUỔI",
       "t": 60,
       "duration": 6,
-      "stage": "garage",
-      "action": "bike",
+      "stage": "platform",
+      "action": "train",
       "camera": "close",
-      "description": "Động cơ tăng tốc"
+      "description": "Đoàn tàu hàng khởi động"
     },
     {
       "id": 9,
@@ -135,10 +135,10 @@
       "actName": "CUỘC TRUY ĐUỔI",
       "t": 66,
       "duration": 8,
-      "stage": "bridge",
-      "action": "ride",
+      "stage": "tunnel",
+      "action": "chase",
       "camera": "rear",
-      "description": "Xe lao lên đường cao tốc",
+      "description": "Chạy dọc đường hầm tàu điện",
       "dialogue": {
         "speaker": "k7",
         "text": "Cầu phía trước đang đóng!",
@@ -151,10 +151,10 @@
       "actName": "CUỘC TRUY ĐUỔI",
       "t": 74,
       "duration": 4,
-      "stage": "bridge",
+      "stage": "tunnel",
       "action": "drone",
       "camera": "wide",
-      "description": "Đàn drone áp sát từ phía sau"
+      "description": "Máy bay săn đuổi trong đường hầm"
     },
     {
       "id": 11,
@@ -162,10 +162,10 @@
       "actName": "CUỘC TRUY ĐUỔI",
       "t": 78,
       "duration": 10,
-      "stage": "bridge",
+      "stage": "tunnel",
       "action": "dodge",
       "camera": "low",
-      "description": "Né tia quét"
+      "description": "Tránh tia quét phía trên đường ray"
     },
     {
       "id": 12,
@@ -173,10 +173,10 @@
       "actName": "CUỘC TRUY ĐUỔI",
       "t": 88,
       "duration": 5,
-      "stage": "bridge",
-      "action": "ride",
+      "stage": "tunnel",
+      "action": "train",
       "camera": "track",
-      "description": "Lướt qua đoàn xe tải"
+      "description": "Vượt qua đoàn tàu đang lao tới"
     },
     {
       "id": 13,
@@ -184,10 +184,10 @@
       "actName": "CUỘC TRUY ĐUỔI",
       "t": 93,
       "duration": 9,
-      "stage": "bridge",
+      "stage": "tunnel",
       "action": "leap",
       "camera": "dutch",
-      "description": "Phóng khỏi cầu gãy",
+      "description": "Đu sang thang bảo trì trên cao",
       "dialogue": {
         "speaker": "linh",
         "text": "Không còn đường khác. Bám chắc!",
@@ -200,10 +200,10 @@
       "actName": "CUỘC TRUY ĐUỔI",
       "t": 102,
       "duration": 7,
-      "stage": "skyline",
+      "stage": "shaft",
       "action": "air",
       "camera": "wide",
-      "description": "Bay qua khoảng không giữa các tòa nhà"
+      "description": "Rơi xuyên trục thang máy"
     },
     {
       "id": 15,
@@ -214,7 +214,7 @@
       "stage": "rooftop",
       "action": "land",
       "camera": "low",
-      "description": "Hạ xuống mái nhà",
+      "description": "Bám được mép mái nhà",
       "dialogue": {
         "speaker": "k7",
         "text": "Độ cao nguy hiểm. Tôi không thích phép tính này!",
@@ -573,10 +573,10 @@
       "actName": "BÌNH MINH THỨ HAI",
       "t": 314,
       "duration": 4,
-      "stage": "skyline",
+      "stage": "city",
       "action": "signal",
       "camera": "overhead",
-      "description": "Các trạm phát đồng loạt thức tỉnh"
+      "description": "Thành phố tự chia sẻ tín hiệu khẩn cấp"
     },
     {
       "id": 43,
@@ -614,7 +614,7 @@
       "stage": "bridge",
       "action": "light",
       "camera": "wide",
-      "description": "Những cây cầu được điều khiển trở lại"
+      "description": "Cửa ngăn lũ mở, nước bắt đầu rút"
     },
     {
       "id": 46,
@@ -623,9 +623,9 @@
       "t": 342,
       "duration": 7,
       "stage": "rooftop",
-      "action": "sunrise",
+      "action": "light",
       "camera": "wide",
-      "description": "Trời sáng sau cơn bão",
+      "description": "Cả thành phố sáng dưới trời đêm",
       "dialogue": {
         "speaker": "k7",
         "text": "Tín hiệu đã tới toàn thành phố.",
@@ -641,7 +641,7 @@
       "stage": "skyline",
       "action": "ending",
       "camera": "crane",
-      "description": "Tín hiệu cuối cùng là của mọi người",
+      "description": "Những con người tiếp nhận tín hiệu mới",
       "dialogue": {
         "speaker": "linh",
         "text": "Không ai cứu được thành phố một mình.",
