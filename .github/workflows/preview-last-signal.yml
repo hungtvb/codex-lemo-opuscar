@@ -42,7 +42,7 @@ jobs:
             1 9 27 36 65 87 109 136 160 191 213 231 255 285 310 352 --size 1280x720
       - name: Build 4-by-4 visual contact sheet and QC metrics
         run: |
-          python3 - <<'PY'
+          "$HOME/lemo-opuscar/.venv/bin/python" - <<'PY'
           from pathlib import Path
           from PIL import Image,ImageStat,ImageOps,ImageDraw
           paths=sorted(Path('films/last-signal-6m/stills').glob('t_*.jpg'),key=lambda p:float(p.stem[2:]))
