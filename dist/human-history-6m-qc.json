@@ -1,0 +1,9 @@
+{
+  "runtime_seconds": 360.0,
+  "voice_provider": "edge-tts vi-VN-NamMinhNeural",
+  "render": "upstream Lemo-Opuscar core/render/video.mjs",
+  "chapter_count": 12,
+  "checks": "passed",
+  "source": "Original original illustrated historical documentary",
+  "video_bytes": 17982987
+}
