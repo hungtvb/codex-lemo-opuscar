@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: last-signal-storyboard-check
+  cancel-in-progress: true
+
 jobs:
   preview:
     runs-on: ubuntu-24.04
