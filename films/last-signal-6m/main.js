@@ -18,6 +18,8 @@ function reseed(x){seed=(x>>>0)||3}
 function rand(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}
 function range(a,b){return a+rand()*(b-a)}
 function polygon(g,pts,fill,stroke=null,w=2,alpha=1){
+ // Fourth argument may be an opacity when no outline is needed.
+ if(typeof stroke==='number'){alpha=stroke;stroke=null;}
  g.save();g.globalAlpha=alpha;g.fillStyle=fill;
  g.beginPath();g.moveTo(pts[0][0],pts[0][1]);
  for(let j=1;j<pts.length;j++)g.lineTo(pts[j][0],pts[j][1]);
