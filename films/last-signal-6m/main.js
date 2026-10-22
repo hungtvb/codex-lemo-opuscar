@@ -223,7 +223,7 @@ function paint(st){
   glow(g,718,515,160,p[3],.13);
   for(let j=0;j<19;j++){
    let x=range(0,BW),y=range(575,BH);
-   lines(g,[[x,y],[x+r(-20,20),y+20]],'#91a9bd',2,.1);
+   lines(g,[[x,y],[x+range(-20,20),y+20]],'#91a9bd',2,.1);
   }
  }
  // Airbrush atmosphere
