@@ -1,0 +1,657 @@
+{
+  "film": "LỆNH CUỐI",
+  "englishTitle": "LAST SIGNAL",
+  "logline": "Một người đưa tin và drone đồng hành phải phá vỡ hệ thống kiểm soát lũ trước khi thành phố chìm trong nước.",
+  "duration": 360,
+  "fps": 24,
+  "shots": [
+    {
+      "id": 0,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 0,
+      "duration": 6,
+      "stage": "city",
+      "action": "shock",
+      "camera": "wide",
+      "description": "Một thành phố sắp chìm vào bóng tối",
+      "dialogue": {
+        "speaker": "radio",
+        "text": "Hệ thống kiểm soát lũ mất quyền điều khiển. Chúng ta còn sáu phút.",
+        "start": 0.6
+      }
+    },
+    {
+      "id": 1,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 6,
+      "duration": 8,
+      "stage": "street",
+      "action": "run",
+      "camera": "track",
+      "description": "Người đưa tin lao qua màn mưa",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Tôi sẽ mang khóa tới tháp trung tâm.",
+        "start": 6.6
+      }
+    },
+    {
+      "id": 2,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 14,
+      "duration": 4,
+      "stage": "street",
+      "action": "drone",
+      "camera": "low",
+      "description": "Máy bay tuần tra phát hiện mục tiêu",
+      "dialogue": {
+        "speaker": "k7",
+        "text": "Linh, chúng phát hiện ra cô rồi.",
+        "start": 14.6
+      }
+    },
+    {
+      "id": 3,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 18,
+      "duration": 10,
+      "stage": "alley",
+      "action": "slide",
+      "camera": "tracking",
+      "description": "Linh trượt qua rào chắn"
+    },
+    {
+      "id": 4,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 28,
+      "duration": 5,
+      "stage": "alley",
+      "action": "insert",
+      "camera": "close",
+      "description": "Con chip khẩn cấp phát tín hiệu đỏ",
+      "dialogue": {
+        "speaker": "radio",
+        "text": "Lệnh ưu tiên: thu hồi thiết bị. Không được để dữ liệu thoát ra ngoài.",
+        "start": 28.6
+      }
+    },
+    {
+      "id": 5,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 33,
+      "duration": 9,
+      "stage": "alley",
+      "action": "fight",
+      "camera": "medium",
+      "description": "Đòn phản công đầu tiên",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Vậy thì phải nhanh hơn chúng.",
+        "start": 33.6
+      }
+    },
+    {
+      "id": 6,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 42,
+      "duration": 7,
+      "stage": "street",
+      "action": "escape",
+      "camera": "rear",
+      "description": "Chạy về cửa gara"
+    },
+    {
+      "id": 7,
+      "act": 0,
+      "actName": "TÍN HIỆU ĐỨT",
+      "t": 49,
+      "duration": 11,
+      "stage": "garage",
+      "action": "bike",
+      "camera": "wide",
+      "description": "Khởi động xe điện"
+    },
+    {
+      "id": 8,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 60,
+      "duration": 6,
+      "stage": "garage",
+      "action": "bike",
+      "camera": "close",
+      "description": "Động cơ tăng tốc"
+    },
+    {
+      "id": 9,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 66,
+      "duration": 8,
+      "stage": "bridge",
+      "action": "ride",
+      "camera": "rear",
+      "description": "Xe lao lên đường cao tốc",
+      "dialogue": {
+        "speaker": "k7",
+        "text": "Cầu phía trước đang đóng!",
+        "start": 66.6
+      }
+    },
+    {
+      "id": 10,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 74,
+      "duration": 4,
+      "stage": "bridge",
+      "action": "drone",
+      "camera": "wide",
+      "description": "Đàn drone áp sát từ phía sau"
+    },
+    {
+      "id": 11,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 78,
+      "duration": 10,
+      "stage": "bridge",
+      "action": "dodge",
+      "camera": "low",
+      "description": "Né tia quét"
+    },
+    {
+      "id": 12,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 88,
+      "duration": 5,
+      "stage": "bridge",
+      "action": "ride",
+      "camera": "track",
+      "description": "Lướt qua đoàn xe tải"
+    },
+    {
+      "id": 13,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 93,
+      "duration": 9,
+      "stage": "bridge",
+      "action": "leap",
+      "camera": "dutch",
+      "description": "Phóng khỏi cầu gãy",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Không còn đường khác. Bám chắc!",
+        "start": 93.6
+      }
+    },
+    {
+      "id": 14,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 102,
+      "duration": 7,
+      "stage": "skyline",
+      "action": "air",
+      "camera": "wide",
+      "description": "Bay qua khoảng không giữa các tòa nhà"
+    },
+    {
+      "id": 15,
+      "act": 1,
+      "actName": "CUỘC TRUY ĐUỔI",
+      "t": 109,
+      "duration": 11,
+      "stage": "rooftop",
+      "action": "land",
+      "camera": "low",
+      "description": "Hạ xuống mái nhà",
+      "dialogue": {
+        "speaker": "k7",
+        "text": "Độ cao nguy hiểm. Tôi không thích phép tính này!",
+        "start": 109.6
+      }
+    },
+    {
+      "id": 16,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 120,
+      "duration": 6,
+      "stage": "rooftop",
+      "action": "run",
+      "camera": "track",
+      "description": "Chạy qua vườn thông gió"
+    },
+    {
+      "id": 17,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 126,
+      "duration": 8,
+      "stage": "rooftop",
+      "action": "fight",
+      "camera": "medium",
+      "description": "Đối đầu vệ binh máy"
+    },
+    {
+      "id": 18,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 134,
+      "duration": 4,
+      "stage": "rooftop",
+      "action": "kick",
+      "camera": "close",
+      "description": "Cú đá xoay",
+      "dialogue": {
+        "speaker": "guard",
+        "text": "Giao khóa ra. Thành phố đã thuộc quyền kiểm soát.",
+        "start": 134.6
+      }
+    },
+    {
+      "id": 19,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 138,
+      "duration": 10,
+      "stage": "skyline",
+      "action": "fall",
+      "camera": "wide",
+      "description": "Ngã khỏi mép mái"
+    },
+    {
+      "id": 20,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 148,
+      "duration": 5,
+      "stage": "rooftop",
+      "action": "rescue",
+      "camera": "low",
+      "description": "K-7 cứu Linh",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Người dân mới là chủ của thành phố này!",
+        "start": 148.6
+      }
+    },
+    {
+      "id": 21,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 153,
+      "duration": 9,
+      "stage": "rooftop",
+      "action": "drone",
+      "camera": "dutch",
+      "description": "Một drone lớn chặn đường"
+    },
+    {
+      "id": 22,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 162,
+      "duration": 7,
+      "stage": "rooftop",
+      "action": "impact",
+      "camera": "close",
+      "description": "Đập vỡ mắt máy"
+    },
+    {
+      "id": 23,
+      "act": 2,
+      "actName": "TRÊN NHỮNG MÁI NHÀ",
+      "t": 169,
+      "duration": 11,
+      "stage": "platform",
+      "action": "escape",
+      "camera": "wide",
+      "description": "Nhảy xuống lối tàu điện",
+      "dialogue": {
+        "speaker": "k7",
+        "text": "Lối xuống tàu điện, ngay bên phải!",
+        "start": 169.6
+      }
+    },
+    {
+      "id": 24,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 180,
+      "duration": 6,
+      "stage": "platform",
+      "action": "run",
+      "camera": "wide",
+      "description": "Nhà ga ngập nước"
+    },
+    {
+      "id": 25,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 186,
+      "duration": 8,
+      "stage": "tunnel",
+      "action": "chase",
+      "camera": "rear",
+      "description": "Bóng máy đuổi trong đường hầm"
+    },
+    {
+      "id": 26,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 194,
+      "duration": 4,
+      "stage": "tunnel",
+      "action": "train",
+      "camera": "low",
+      "description": "Đoàn tàu xuất hiện",
+      "dialogue": {
+        "speaker": "radio",
+        "text": "Cảnh báo: mực nước tiếp tục dâng.",
+        "start": 194.6
+      }
+    },
+    {
+      "id": 27,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 198,
+      "duration": 10,
+      "stage": "tunnel",
+      "action": "duck",
+      "camera": "close",
+      "description": "Linh bám sát đường ray"
+    },
+    {
+      "id": 28,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 208,
+      "duration": 5,
+      "stage": "platform",
+      "action": "silence",
+      "camera": "close",
+      "description": "K-7 bị thương",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "K-7! Trả lời tôi!",
+        "start": 208.6
+      }
+    },
+    {
+      "id": 29,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 213,
+      "duration": 9,
+      "stage": "platform",
+      "action": "memory",
+      "camera": "close",
+      "description": "Tín hiệu cuối của bạn đồng hành",
+      "dialogue": {
+        "speaker": "k7",
+        "text": "Bộ nguồn bị hỏng. Nhưng tôi vẫn còn một lần truyền tin.",
+        "start": 213.6
+      }
+    },
+    {
+      "id": 30,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 222,
+      "duration": 7,
+      "stage": "shaft",
+      "action": "climb",
+      "camera": "wide",
+      "description": "Đường lên tháp điều khiển"
+    },
+    {
+      "id": 31,
+      "act": 3,
+      "actName": "BÓNG TỐI DƯỚI LÒNG ĐẤT",
+      "t": 229,
+      "duration": 11,
+      "stage": "shaft",
+      "action": "leap",
+      "camera": "dutch",
+      "description": "Vượt chướng ngại trong trục thang",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Tôi sẽ không bỏ cậu ở đây.",
+        "start": 229.6
+      }
+    },
+    {
+      "id": 32,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 240,
+      "duration": 6,
+      "stage": "tower",
+      "action": "climb",
+      "camera": "wide",
+      "description": "Tháp đèn đỏ phía trên mây"
+    },
+    {
+      "id": 33,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 246,
+      "duration": 8,
+      "stage": "control",
+      "action": "sneak",
+      "camera": "medium",
+      "description": "Linh tiếp cận hệ thống chính"
+    },
+    {
+      "id": 34,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 254,
+      "duration": 4,
+      "stage": "control",
+      "action": "guard",
+      "camera": "wide",
+      "description": "Vệ binh cuối chặn cửa",
+      "dialogue": {
+        "speaker": "guard",
+        "text": "Một mình cô không thể chống lại cả hệ thống.",
+        "start": 254.6
+      }
+    },
+    {
+      "id": 35,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 258,
+      "duration": 10,
+      "stage": "control",
+      "action": "fight",
+      "camera": "track",
+      "description": "Trận chiến bên lõi dữ liệu"
+    },
+    {
+      "id": 36,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 268,
+      "duration": 5,
+      "stage": "control",
+      "action": "kick",
+      "camera": "close",
+      "description": "Chống trả ngay rìa vực"
+    },
+    {
+      "id": 37,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 273,
+      "duration": 9,
+      "stage": "control",
+      "action": "fall",
+      "camera": "dutch",
+      "description": "Tưởng như thất bại",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Tôi không đến đây một mình.",
+        "start": 273.6
+      }
+    },
+    {
+      "id": 38,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 282,
+      "duration": 7,
+      "stage": "control",
+      "action": "recover",
+      "camera": "close",
+      "description": "K-7 truyền nguồn điện cuối",
+      "dialogue": {
+        "speaker": "k7",
+        "text": "Linh, khóa này không dùng để cứu người. Nó dùng để khóa quyền điều khiển.",
+        "start": 282.6
+      }
+    },
+    {
+      "id": 39,
+      "act": 4,
+      "actName": "THÁP ĐIỀU KHIỂN",
+      "t": 289,
+      "duration": 11,
+      "stage": "control",
+      "action": "insert",
+      "camera": "insert",
+      "description": "Lựa chọn: tuân lệnh hay mở khóa"
+    },
+    {
+      "id": 40,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 300,
+      "duration": 6,
+      "stage": "control",
+      "action": "choice",
+      "camera": "close",
+      "description": "Linh phá khóa độc quyền",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Vậy thì chúng ta sẽ trao quyền cho tất cả mọi người.",
+        "start": 300.6
+      }
+    },
+    {
+      "id": 41,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 306,
+      "duration": 8,
+      "stage": "control",
+      "action": "pulse",
+      "camera": "wide",
+      "description": "Xung ánh sáng lan ra toàn mạng",
+      "dialogue": {
+        "speaker": "radio",
+        "text": "Giao thức phân tán được kích hoạt.",
+        "start": 306.6
+      }
+    },
+    {
+      "id": 42,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 314,
+      "duration": 4,
+      "stage": "skyline",
+      "action": "signal",
+      "camera": "overhead",
+      "description": "Các trạm phát đồng loạt thức tỉnh"
+    },
+    {
+      "id": 43,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 318,
+      "duration": 10,
+      "stage": "city",
+      "action": "light",
+      "camera": "wide",
+      "description": "Đèn thành phố sáng dần",
+      "dialogue": {
+        "speaker": "citizen",
+        "text": "Cửa thoát hiểm mở rồi! Mọi người đi theo tôi!",
+        "start": 318.6
+      }
+    },
+    {
+      "id": 44,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 328,
+      "duration": 5,
+      "stage": "platform",
+      "action": "rescue",
+      "camera": "medium",
+      "description": "Người dân mở cửa thoát hiểm"
+    },
+    {
+      "id": 45,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 333,
+      "duration": 9,
+      "stage": "bridge",
+      "action": "light",
+      "camera": "wide",
+      "description": "Những cây cầu được điều khiển trở lại"
+    },
+    {
+      "id": 46,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 342,
+      "duration": 7,
+      "stage": "rooftop",
+      "action": "sunrise",
+      "camera": "wide",
+      "description": "Trời sáng sau cơn bão",
+      "dialogue": {
+        "speaker": "k7",
+        "text": "Tín hiệu đã tới toàn thành phố.",
+        "start": 342.6
+      }
+    },
+    {
+      "id": 47,
+      "act": 5,
+      "actName": "BÌNH MINH THỨ HAI",
+      "t": 349,
+      "duration": 11,
+      "stage": "skyline",
+      "action": "ending",
+      "camera": "crane",
+      "description": "Tín hiệu cuối cùng là của mọi người",
+      "dialogue": {
+        "speaker": "linh",
+        "text": "Không ai cứu được thành phố một mình.",
+        "start": 349.6
+      }
+    }
+  ],
+  "credits": {
+    "music": "original procedural score",
+    "art": "original procedural cel-animation",
+    "voice": "Microsoft Edge neural TTS / offline fallback"
+  }
+}
