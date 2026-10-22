@@ -365,8 +365,8 @@ function drone(g,x,y,scale,t,evil=true,damaged=false){
  g.restore();
 }
 function ellipseRotor(g,t){
- ellipse(g,0,0,23+Math.sin(t*24)*3,4,'#8692a4',.36);
- ellipse(g,0,0,4,5,'#36485b',.9);
+ circle(g,0,0,23+Math.sin(t*24)*3,4,'#8692a4',.36);
+ circle(g,0,0,4,5,'#36485b',.9);
 }
 function bike(g,x,y,s,p,t){
  // stylized rescue rail cart, not motorcycle; grey-blue service trolley.
