@@ -33,6 +33,7 @@ jobs:
         run: |
           git clone --depth 1 --filter=blob:none --sparse \
             https://github.com/lemomo-ai/lemo-opuscar.git "$HOME/lemo-opuscar"
+          git -C "$HOME/lemo-opuscar" sparse-checkout set core plugin styles tools
           test -f "$HOME/lemo-opuscar/core/render/video.mjs"
           git -C "$HOME/lemo-opuscar" rev-parse HEAD | tee "$GITHUB_WORKSPACE/upstream-sha.txt"
           sh "$HOME/lemo-opuscar/plugin/skills/lemo-opuscar/scripts/setup.sh" deps
