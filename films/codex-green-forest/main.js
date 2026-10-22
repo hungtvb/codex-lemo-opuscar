@@ -226,9 +226,8 @@ function background(g,t){
 function fog(g,t){
  const x=t*7;
  for(let i=0;i<5;i++){
-  g.save();g.globalAlpha=.045;
-  E(g,(i*290+x)%1400-150,340+i*24,170,24,"#f6f0dd",1);
-  g.restore();
+  // A wash at 5.5% opacity, never an opaque white ellipse.
+  E(g,(i*290+x)%1400-150,340+i*24,170,24,"#f6f0dd",.055);
  }
 }
 window.DUR=DURATION;
