@@ -1,0 +1,100 @@
+{
+  "title": "LỊCH SỬ LOÀI NGƯỜI — 6 PHÚT",
+  "language": "vi-VN",
+  "voice": "vi-VN-NamMinhNeural",
+  "duration": 360,
+  "sceneDuration": 30,
+  "chapters": [
+    {
+      "id": "prologue",
+      "title": "CHÚNG TA ĐẾN TỪ ĐÂU?",
+      "era": "4,6 tỷ năm trước → hôm nay",
+      "theme": "cosmos",
+      "voice": "Khi ngước nhìn bầu trời đêm, ta thấy hàng tỷ ngôi sao. Nhưng câu chuyện của loài người bắt đầu trên một hành tinh nhỏ, Trái Đất. Hành tinh ấy hình thành khoảng bốn phẩy sáu tỷ năm trước. Sự sống xuất hiện từ rất lâu trước khi có chúng ta. Qua những biến đổi kéo dài hàng triệu năm, các sinh vật tiến hóa và thích nghi với môi trường. Con người không xuất hiện đột ngột; chúng ta là một nhánh trẻ trên cây tiến hóa của sự sống. Để hiểu mình là ai, hãy trở lại châu Phi, nơi câu chuyện của tổ tiên chúng ta dần mở ra."
+    },
+    {
+      "id": "bipedal",
+      "title": "NHỮNG BƯỚC CHÂN ĐẦU TIÊN",
+      "era": "Khoảng 6 triệu → 2 triệu năm trước",
+      "theme": "savanna",
+      "voice": "Từ hàng triệu năm trước, ở châu Phi đã tồn tại nhiều loài họ hàng xa của con người. Một thay đổi quan trọng là khả năng đi thẳng bằng hai chân. Đôi tay được tự do hơn để mang thức ăn, bế con, và về sau sử dụng công cụ. Tiến hóa không phải một chiếc thang đi lên, mà giống như một cái cây với nhiều nhánh khác nhau. Có những nhánh tồn tại rất lâu, rồi biến mất. Chúng ta không tiến hóa từ loài khỉ đang sống ngày nay; con người và các loài linh trưởng hiện đại có chung những tổ tiên xa xưa."
+    },
+    {
+      "id": "fire",
+      "title": "CÔNG CỤ, HỢP TÁC VÀ LỬA",
+      "era": "Thời đại đồ đá sớm",
+      "theme": "fire",
+      "voice": "Những công cụ bằng đá đầu tiên giúp tổ tiên chúng ta cắt, đập và chế biến thức ăn hiệu quả hơn. Qua nhiều thế hệ, kỹ năng được học hỏi và truyền lại. Việc sử dụng lửa dần thay đổi cuộc sống: ánh sáng giữa đêm tối, hơi ấm trong những vùng lạnh, và thức ăn có thể được nấu chín. Thời điểm con người kiểm soát lửa một cách thường xuyên vẫn là đề tài nghiên cứu. Nhưng có một điều rõ ràng: khả năng cùng nhau giải quyết vấn đề đã trở thành sức mạnh của nhiều cộng đồng người thời tiền sử."
+    },
+    {
+      "id": "sapiens",
+      "title": "HOMO SAPIENS XUẤT HIỆN",
+      "era": "Khoảng 300.000 năm trước",
+      "theme": "africa",
+      "voice": "Khoảng ba trăm nghìn năm trước, Homo sapiens, loài người hiện đại, đã xuất hiện tại châu Phi. Họ sống bằng săn bắt, hái lượm, chế tạo công cụ và thích nghi với nhiều môi trường khác nhau. Vào những thời kỳ sau đó, các nhóm người di chuyển qua nhiều vùng đất, gặp gỡ những nhóm người khác và đôi khi trao đổi cả nguồn gen. Cuộc phân tán ra khắp thế giới không diễn ra trong một chuyến đi duy nhất. Đó là hành trình rất dài, gồm nhiều đợt di cư, nhiều ngã rẽ, và vô số câu chuyện không còn lưu lại."
+    },
+    {
+      "id": "culture",
+      "title": "NGÔN NGỮ, NGHỆ THUẬT, KÝ ỨC",
+      "era": "Hàng chục nghìn năm trước",
+      "theme": "cave",
+      "voice": "Những bàn tay in trên vách đá, hình động vật trong hang động, đồ trang sức, nhạc cụ cổ xưa và những nghi thức mai táng kể rằng tổ tiên chúng ta không chỉ tìm cách sống sót. Họ còn sáng tạo, ghi nhớ, tưởng tượng và chia sẻ ý nghĩa. Ngôn ngữ nói không để lại hóa thạch, nên nguồn gốc chính xác của nó vẫn chưa rõ. Nhưng khi con người có thể kể chuyện và truyền tri thức, một phát minh của thế hệ trước không nhất thiết phải biến mất. Văn hóa bắt đầu tích lũy, như những nét vẽ chồng lên một bức tranh lớn."
+    },
+    {
+      "id": "farming",
+      "title": "CUỘC CÁCH MẠNG NÔNG NGHIỆP",
+      "era": "Khoảng 12.000 năm trước",
+      "theme": "farming",
+      "voice": "Khoảng mười hai nghìn năm trước, tại một số khu vực trên thế giới, con người dần thuần hóa cây trồng và vật nuôi. Nông nghiệp không ra đời ở một nơi duy nhất và cũng không thay thế săn bắt hái lượm ngay lập tức. Khi có thể tạo ra nguồn lương thực ổn định hơn, nhiều cộng đồng bắt đầu định cư lâu dài. Làng mạc phát triển, dân số tăng và lao động được phân chia rõ hơn. Tuy vậy, canh tác cũng đi kèm bệnh tật, bất bình đẳng và phụ thuộc vào mùa màng. Đó là bước ngoặt lớn, nhưng không phải một bước tiến chỉ toàn lợi ích."
+    },
+    {
+      "id": "writing",
+      "title": "THÀNH PHỐ VÀ CHỮ VIẾT",
+      "era": "Khoảng thiên niên kỷ IV TCN",
+      "theme": "city",
+      "voice": "Những ngôi làng dần trở thành đô thị ở nhiều khu vực, từ Lưỡng Hà và thung lũng sông Nin đến lưu vực sông Ấn và những nền văn minh cổ của Trung Hoa. Người dân xây dựng kênh tưới, kho lương thực, đền đài và các hệ thống quản lý phức tạp. Chữ viết xuất hiện độc lập ở một số truyền thống văn hóa, giúp ghi lại giao dịch, luật lệ, tín ngưỡng và lịch sử. Nhưng không phải cộng đồng nào cũng cần chữ viết để lưu giữ tri thức: nhiều xã hội vẫn truyền kinh nghiệm bằng lời nói, ký hiệu và thực hành qua nhiều thế hệ."
+    },
+    {
+      "id": "networks",
+      "title": "ĐẾ CHẾ VÀ NHỮNG CON ĐƯỜNG",
+      "era": "Cổ đại → trung đại",
+      "theme": "trade",
+      "voice": "Các vương quốc và đế chế mở rộng lãnh thổ, xây dựng đường sá, quân đội và hệ thống thu thuế. Những con đường thương mại trên đất liền và đường biển kết nối châu Á, châu Phi và châu Âu. Tơ lụa, gia vị, kim loại và đồ gốm di chuyển cùng các ý tưởng, công nghệ và tôn giáo. Nhưng cùng với trao đổi là chiến tranh, nô lệ và dịch bệnh. Lịch sử chưa bao giờ chỉ là câu chuyện của vua chúa. Nó còn là cuộc sống của nông dân, thương nhân, thợ thủ công và những người thường không được ghi tên trong sử sách."
+    },
+    {
+      "id": "knowledge",
+      "title": "TRI THỨC KHÔNG CÓ BIÊN GIỚI",
+      "era": "Từ cổ đại đến thế kỷ XV",
+      "theme": "knowledge",
+      "voice": "Toán học, thiên văn, y học, triết học và kỹ thuật phát triển trong nhiều nền văn hóa khác nhau. Các học giả tại Ấn Độ, Trung Hoa, thế giới Hồi giáo, châu Âu, châu Phi và nhiều vùng đất khác đã quan sát, tranh luận, sao chép và cải tiến tri thức. Giấy, kỹ thuật in, hệ thống số và các phương pháp đo đạc được phát triển rồi lan truyền theo nhiều con đường. Không có một nền văn minh đơn độc tạo ra toàn bộ thế giới hiện đại. Tri thức của nhân loại giống một dòng sông lớn, được bồi đắp bởi vô số nhánh nhỏ qua nhiều thế kỷ."
+    },
+    {
+      "id": "oceans",
+      "title": "KHI CÁC ĐẠI DƯƠNG GẶP NHAU",
+      "era": "Thế kỷ XV → XVIII",
+      "theme": "ocean",
+      "voice": "Từ cuối thế kỷ mười lăm, những cuộc hải hành xuyên đại dương góp phần kết nối các châu lục ngày càng sâu rộng. Hàng hóa, cây trồng, kiến thức và con người di chuyển giữa những thế giới từng ít tiếp xúc trực tiếp. Nhưng sự kết nối ấy không bình đẳng: chinh phục thuộc địa, cưỡng bức lao động, buôn bán nô lệ và những dịch bệnh tàn khốc gây tổn thất rất lớn, đặc biệt cho các cộng đồng bản địa. Vì thế, khi nói về khám phá địa lý, ta cũng cần nhớ rằng nhiều vùng đất đã có người sinh sống và có nền văn hóa phong phú từ rất lâu."
+    },
+    {
+      "id": "industry",
+      "title": "MÁY MÓC THAY ĐỔI THẾ GIỚI",
+      "era": "Thế kỷ XVIII → đầu XX",
+      "theme": "industry",
+      "voice": "Cuộc Cách mạng Công nghiệp bắt đầu tại Anh rồi lan sang nhiều nơi, đưa máy hơi nước, nhà máy và đường sắt vào đời sống. Sản xuất tăng nhanh, thành phố mở rộng và các phát minh mới rút ngắn khoảng cách. Điện, vi trùng học, vệ sinh công cộng và những tiến bộ y học dần thay đổi tuổi thọ và công việc của con người. Nhưng nhà máy cũng tạo ra ô nhiễm, điều kiện lao động khắc nghiệt và khoảng cách giàu nghèo. Để có quyền lợi và điều kiện sống tốt hơn, nhiều thế hệ đã đấu tranh, tổ chức và xây dựng các thể chế xã hội mới."
+    },
+    {
+      "id": "future",
+      "title": "CHIẾN TRANH, KẾT NỐI VÀ TƯƠNG LAI",
+      "era": "Thế kỷ XX → XXI",
+      "theme": "future",
+      "voice": "Thế kỷ hai mươi chứng kiến hai cuộc chiến tranh thế giới với những mất mát khủng khiếp, đồng thời chứng kiến các phong trào giành độc lập, mở rộng quyền con người và hợp tác quốc tế. Con người chinh phục không gian, phát triển máy tính, Internet và những công nghệ có thể thay đổi cách chúng ta học hỏi. Bước sang thế kỷ hai mươi mốt, trí tuệ nhân tạo mở ra khả năng mới, trong khi biến đổi khí hậu và bất bình đẳng đặt ra những thách thức chung. Lịch sử loài người không phải câu chuyện tất yếu đi đến thành công. Đó là hành trình của lựa chọn. Và chương tiếp theo, đang nằm trong tay chúng ta."
+    }
+  ],
+  "sources": [
+    "https://humanorigins.si.edu/education/introduction-human-evolution",
+    "https://humanorigins.si.edu/evidence/human-fossils/species/homo-sapiens",
+    "https://humanorigins.si.edu/human-characteristics/humans-change-world",
+    "https://www.nhm.ac.uk/discover/when-how-did-modern-humans-homo-sapiens-spread-out-of-africa.html",
+    "https://www.britannica.com/topic/history-of-technology"
+  ]
+}
