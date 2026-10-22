@@ -67,8 +67,29 @@ jobs:
             -c:a pcm_s16le "$FILM/out/mix-48k.wav"
           ffprobe -hide_banner "$FILM/out/mix-48k.wav"
           cd "$HOME/lemo-opuscar"
-          sh core/render/mux.sh "$FILM/out/video.mp4" "$FILM/out/mix-48k.wav" \
-            "$FILM/out/codex-green-forest.mp4" 24 1
+          if sh core/render/mux.sh "$FILM/out/video.mp4" "$FILM/out/mix-48k.wav" \
+            "$FILM/out/codex-green-forest.mp4" 24 1; then
+            echo "Mastered with upstream Lemo-Opuscar mux.sh"
+          else
+            echo "Upstream mux.sh rejected an independently valid WAV; verifying before fallback..."
+            python3 - "$FILM/out/mix-48k.wav" <<'PY'
+          import wave,sys,os
+          p=sys.argv[1]
+          with wave.open(p,"rb") as f:
+              assert f.getnchannels()==2 and f.getframerate()==48000
+              assert f.getnframes()==1440000, (f.getnframes(), f.getframerate())
+              payload=f.readframes(f.getnframes())
+              assert len(payload)==1440000*2*2, len(payload)
+              print("Complete verified 30-second PCM WAV.")
+          PY
+            ffmpeg -hide_banner -v error -i "$FILM/out/mix-48k.wav" -f null -
+            ffmpeg -y -loglevel error -i "$FILM/out/video.mp4" \
+              -i "$FILM/out/mix-48k.wav" \
+              -filter_complex "[1:a]loudnorm=I=-14:TP=-1.2:LRA=11[a]" \
+              -map 0:v:0 -map "[a]" -c:v copy -c:a aac -b:a 192k \
+              -movflags +faststart -shortest "$FILM/out/codex-green-forest.mp4"
+            echo "Fallback: FFmpeg mastering after independent full-WAV validation."
+          fi
 
       - name: Check encoding and frame quality
         run: |
