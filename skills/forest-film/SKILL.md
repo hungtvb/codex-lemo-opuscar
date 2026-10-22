@@ -42,6 +42,7 @@ If a required native subsystem cannot run, show the failure and mark it **PARTIA
 - Mix video and score to a sensible level (nominal integrated loudness −14 LUFS) and review at real playback speed.
 
 **G5 / Render, watch, revise, deliver**
+- Before describing the film as compliant, run `python skills/forest-film/scripts/verify_delivery.py <workspace> --video <mp4>` against real artifacts. If it fails, do not claim successful skill execution. If a native capability such as WebGL post is unavailable, repeat with `--allow-partial` only when the fallback is documented, and describe the result as **PARTIAL**, never full compliance.
 - First test **locally** with the upstream renderer: `node core/render/video.mjs <film> --fps 24 --workers 3 --size 1280x720 --out <film>/out/picture.mp4`.
 - Run `ffprobe` for codec, exact duration, size, FPS and audio. Inspect 5–10 stills plus the 0.2-second action strip; watch at normal speed, including beginning, impact and ending.
 - Record failed checks and run at least one visual correction pass. Never report **SUCCESS** based on GitHub Actions or an MP4 existing.
