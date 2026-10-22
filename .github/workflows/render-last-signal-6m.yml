@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: last-signal-6m-master-render
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   produce:
@@ -23,10 +23,20 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Install FFmpeg, voices fallback, Python, and Vietnamese fonts
+      - name: Verify runner tools (install only if missing)
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg python3-venv espeak-ng fonts-dejavu-core
+          set -euo pipefail
+          export DEBIAN_FRONTEND=noninteractive
+          if ! command -v ffmpeg >/dev/null; then
+            timeout 120 sudo apt-get update -qq
+            timeout 180 sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -1
+          python3 -V
+          # Neural Vietnamese voices are primary. Offline espeak-ng is optional.
+          if ! command -v espeak-ng >/dev/null; then
+            timeout 70 sudo apt-get install -y -qq espeak-ng || echo "espeak-ng unavailable; neural TTS required"
+          fi
 
       - name: Install upstream Lemo-Opuscar renderer and edge-tts
         run: |
