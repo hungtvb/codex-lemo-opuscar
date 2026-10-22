@@ -62,8 +62,12 @@ jobs:
           set -euo pipefail
           FILM="$GITHUB_WORKSPACE/films/codex-green-forest"
           "$HOME/lemo-opuscar/.venv/bin/python" "$FILM/mix.py"
+          ffprobe -hide_banner "$FILM/out/mix.wav"
+          ffmpeg -y -loglevel error -i "$FILM/out/mix.wav" -ar 48000 -ac 2 \
+            -c:a pcm_s16le "$FILM/out/mix-48k.wav"
+          ffprobe -hide_banner "$FILM/out/mix-48k.wav"
           cd "$HOME/lemo-opuscar"
-          sh core/render/mux.sh "$FILM/out/video.mp4" "$FILM/out/mix.wav" \
+          sh core/render/mux.sh "$FILM/out/video.mp4" "$FILM/out/mix-48k.wav" \
             "$FILM/out/codex-green-forest.mp4" 24 1
 
       - name: Check encoding and frame quality
