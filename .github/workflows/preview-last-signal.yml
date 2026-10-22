@@ -1,0 +1,68 @@
+name: Last Signal — Storyboard Visual QC
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'films/last-signal-6m/main.js'
+      - 'films/last-signal-6m/index.html'
+      - 'films/last-signal-6m/story.json'
+      - '.github/workflows/preview-last-signal.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare upstream Lemo-Opuscar
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --filter=blob:none --sparse https://github.com/lemomo-ai/lemo-opuscar.git "$HOME/lemo-opuscar"
+          git -C "$HOME/lemo-opuscar" sparse-checkout set core plugin styles/cel-anime-80s tools
+          sh "$HOME/lemo-opuscar/plugin/skills/lemo-opuscar/scripts/setup.sh" deps
+      - name: Validate original storyboard
+        run: |
+          python3 - <<'PY'
+          import json
+          j=json.load(open('films/last-signal-6m/story.json'))
+          assert j['duration']==360 and len(j['shots'])==48
+          assert sum(x['duration'] for x in j['shots'])==360
+          assert all(x['t']==sum(y['duration'] for y in j['shots'][:i]) for i,x in enumerate(j['shots']))
+          print('Storyboard QC: 48 shots, 360 seconds, all timings valid')
+          PY
+      - name: Render sixteen representative shots with real Playwright engine
+        run: |
+          set -euo pipefail
+          cd "$HOME/lemo-opuscar"
+          node core/render/still.mjs "$GITHUB_WORKSPACE/films/last-signal-6m" \
+            1 9 27 36 65 87 109 136 160 191 213 231 255 285 310 352 --size 1280x720
+      - name: Build 4-by-4 visual contact sheet and QC metrics
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image,ImageStat,ImageOps,ImageDraw
+          paths=sorted(Path('films/last-signal-6m/stills').glob('t_*.jpg'),key=lambda p:float(p.stem[2:]))
+          assert len(paths)==16,paths
+          sheet=Image.new('RGB',(1280,720),(12,20,29))
+          for i,p in enumerate(paths):
+            img=Image.open(p).convert('RGB')
+            contrast=sum(ImageStat.Stat(img.resize((160,90))).stddev)/3
+            print(f'{p.name}: contrast={contrast:.1f}')
+            assert contrast>9.0,(p,contrast)
+            frame=ImageOps.fit(img,(320,180))
+            sheet.paste(frame,((i%4)*320,(i//4)*180))
+          sheet.save('films/last-signal-6m/stills/storyboard.jpg',quality=92)
+          print('16-shot storyboard QC PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: last-signal-visual-qc
+          path: |
+            films/last-signal-6m/stills/*.jpg
+            films/last-signal-6m/story.json
+          retention-days: 30
