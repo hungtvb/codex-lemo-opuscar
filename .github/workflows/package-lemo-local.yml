@@ -16,11 +16,11 @@ jobs:
         run: |
           set -euo pipefail
           git clone --depth 1 --filter=blob:none --sparse https://github.com/lemomo-ai/lemo-opuscar.git upstream
-          git -C upstream sparse-checkout set core
+          git -C upstream sparse-checkout set core styles/cel-anime-80s
           cd upstream
           npm install --ignore-scripts --no-audit --no-fund --omit=optional
           git rev-parse HEAD > UPSTREAM_SHA
-          tar -czf "$GITHUB_WORKSPACE/lemo-local-runtime.tar.gz" core node_modules package.json UPSTREAM_SHA
+          tar -czf "$GITHUB_WORKSPACE/lemo-local-runtime.tar.gz" core styles/cel-anime-80s node_modules package.json UPSTREAM_SHA
           ls -lh "$GITHUB_WORKSPACE/lemo-local-runtime.tar.gz"
       - uses: actions/upload-artifact@v4
         with:
