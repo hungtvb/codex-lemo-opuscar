@@ -1,0 +1,116 @@
+name: Render Codex Forest Film (Lemo-Opuscar)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'films/codex-green-forest/**'
+      - '.github/workflows/render-codex-forest.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-codex-green-forest
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - name: Checkout Codex film and skill
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Install system tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg python3-venv
+
+      - name: Clone real Lemo-Opuscar source
+        run: |
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://github.com/lemomo-ai/lemo-opuscar.git "$HOME/lemo-opuscar"
+          test -f "$HOME/lemo-opuscar/core/render/video.mjs"
+          git -C "$HOME/lemo-opuscar" rev-parse HEAD | tee "$GITHUB_WORKSPACE/upstream-sha.txt"
+          sh "$HOME/lemo-opuscar/plugin/skills/lemo-opuscar/scripts/setup.sh" deps
+
+      - name: Render five diagnostic styleframes
+        env:
+          LIB: /home/runner/lemo-opuscar
+        run: |
+          set -euo pipefail
+          cd "$HOME/lemo-opuscar"
+          node core/render/still.mjs "$GITHUB_WORKSPACE/films/codex-green-forest" \
+            1.5 7.5 15 22 28 --size 1280x720
+          ls -lh "$GITHUB_WORKSPACE/films/codex-green-forest/stills/"
+
+      - name: Render film with upstream Lemo-Opuscar Playwright tool
+        run: |
+          set -euo pipefail
+          cd "$HOME/lemo-opuscar"
+          mkdir -p "$GITHUB_WORKSPACE/films/codex-green-forest/out"
+          node core/render/video.mjs "$GITHUB_WORKSPACE/films/codex-green-forest" \
+            --fps 24 --workers 3 --size 1280x720 \
+            --out "$GITHUB_WORKSPACE/films/codex-green-forest/out/video.mp4"
+
+      - name: Generate sound and mix with upstream mastering script
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/codex-green-forest"
+          "$HOME/lemo-opuscar/.venv/bin/python" "$FILM/mix.py"
+          cd "$HOME/lemo-opuscar"
+          sh core/render/mux.sh "$FILM/out/video.mp4" "$FILM/out/mix.wav" \
+            "$FILM/out/codex-green-forest.mp4" 24 1
+
+      - name: Check encoding and frame quality
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/codex-green-forest"
+          ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate \
+            -of json "$FILM/out/codex-green-forest.mp4" | tee "$FILM/out/ffprobe.json"
+          "$HOME/lemo-opuscar/.venv/bin/python" - <<'PY'
+          from PIL import Image,ImageStat
+          from pathlib import Path
+          import json
+          folder=Path('films/codex-green-forest')
+          data=json.loads((folder/'out/ffprobe.json').read_text())
+          video=[s for s in data['streams'] if s['codec_name']=='h264']
+          audio=[s for s in data['streams'] if s['codec_name']=='aac']
+          assert video and audio, 'missing H264 or AAC stream'
+          assert video[0]['width']==1280 and video[0]['height']==720
+          assert abs(float(data['format']['duration'])-30)<.35
+          for file in sorted((folder/'stills').glob('*.jpg')):
+              img=Image.open(file).convert('RGB')
+              std=sum(ImageStat.Stat(img.resize((128,72))).stddev)/3
+              assert std>8, f'blank/flat still {file}: std={std}'
+              print(f'QC {file.name}: mean contrast std={std:.1f}')
+          assert len(list((folder/'stills').glob('*.jpg')))==5
+          print('QC passed: duration, streams, size, 5 styleframes')
+          PY
+
+      - name: Upload playable MP4 and diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: codex-green-forest-film
+          path: |
+            films/codex-green-forest/out/codex-green-forest.mp4
+            films/codex-green-forest/out/ffprobe.json
+            films/codex-green-forest/stills/*.jpg
+            films/codex-green-forest/TREATMENT.md
+            upstream-sha.txt
+          retention-days: 30
+
+      - name: Publish finished MP4 in repository
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp films/codex-green-forest/out/codex-green-forest.mp4 dist/codex-green-forest.mp4
+          cp films/codex-green-forest/out/ffprobe.json dist/codex-green-forest-ffprobe.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/codex-green-forest.mp4 dist/codex-green-forest-ffprobe.json
+          git commit -m "film: publish Codex green forest Lemo-Opuscar render [skip ci]"
+          git push origin HEAD:main
