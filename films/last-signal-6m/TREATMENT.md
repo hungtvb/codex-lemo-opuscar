@@ -8,7 +8,7 @@ Style: **80s Cel Anime** (Lemo-Opuscar `styles/cel-anime-80s/STYLE.md`); retro c
 3. **Two opposing couriers** — interesting moral conflict but exposition-heavy for short film.
 
 ## Premise
-Vân Đô, a fictional coastal megacity in 2091. A centralized flood-control system has locked civilian evacuation gates. Courier **Linh**, wearing a bright saffron-red scarf, carries the master access key. Her sidekick **K-7**, a little blue scouting drone, warns about a hard six-minute deadline. Enforcer drones hunt them as she races through elevated bridges, rooftops, the flooded metro, and a control tower. At the core, Linh learns that the key does not restore the public system — it monopolizes control. She rejects the command, distributes access to ordinary people, and the city opens its own gates.
+Vân Đô, a fictional coastal megacity in 2091. A centralized flood-control system has locked civilian evacuation gates. Courier **Linh**, a flood-rescue engineer wearing a vivid red scarf, carries the master access key. Her sidekick **K-7**, a little blue scouting drone, warns about a hard six-minute deadline. Enforcer drones hunt them as she fights through a flooded transit station, maintenance shafts, rooftops and a control tower. At the core, Linh learns that the key does not restore the public system — it monopolizes control. She rejects the command, distributes access to ordinary people, and the city opens its own gates.
 
 ## Cinematic references — grammar only
 - 1980s hand-painted Japanese sci-fi OVA: layered airbrushed neon plates, stark two-tone cels, rain reflections and coloured ink.
@@ -22,12 +22,12 @@ Do not copy existing characters, designs, music, locations or signature composit
 **Hunter drones**: black mechanical triangles/circles with red scanners, visually distinct from K-7.
 
 ## Six act story / major action
-I 00–60: signal fails; Linh receives last key, dodges ambush, escapes on motorbike.
-II 60–120: neon freeway motorcycle pursuit; leap from broken flyover onto tower roofs.
+I 00–60: evacuation system is disabled; Linh steals the emergency key, dodges an ambush and escapes down the flooded metro access.
+II 60–120: chase through train tunnels and moving maintenance platforms, then a dangerous fall through a vertical elevator shaft.
 III 120–180: rooftop parkour and hand-to-hand duel; K-7 saves her fall.
 IV 180–240: flooded underground train tunnel; near-hit by train; K-7 damaged, keeps its last charge.
 V 240–300: tower ascent; enemy showdown; reveal that the key would empower the antagonist.
-VI 300–360: Linh distributes access to the city's people; flood gates open; lights return at dawn.
+VI 300–360: Linh distributes control to the city's people; the flood gates open and the city lights turn on in the rainy night, echoing the powerless opening composition.
 
 ## Shot list and camera language
 48 shots; 8 per act. Shot durations repeat a purposefully varied 6/8/4/10/5/9/7/11-second grid within each 60-second act.
