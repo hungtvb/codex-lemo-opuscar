@@ -1,0 +1,221 @@
+name: LỆNH CUỐI — Six-Minute Cinematic Action Film
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/render-last-signal-6m.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: last-signal-6m-master-render
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout original screenplay and animation
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Install FFmpeg, voices fallback, Python, and Vietnamese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg python3-venv espeak-ng fonts-dejavu-core
+
+      - name: Install upstream Lemo-Opuscar renderer and edge-tts
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://github.com/lemomo-ai/lemo-opuscar.git "$HOME/lemo-opuscar"
+          git -C "$HOME/lemo-opuscar" sparse-checkout set core plugin tools styles/cel-anime-80s
+          test -f "$HOME/lemo-opuscar/core/render/video.mjs"
+          git -C "$HOME/lemo-opuscar" rev-parse HEAD | tee upstream-sha-last-signal.txt
+          sh "$HOME/lemo-opuscar/plugin/skills/lemo-opuscar/scripts/setup.sh" deps
+          if command -v uv >/dev/null; then
+            uv pip install --python "$HOME/lemo-opuscar/.venv/bin/python" "edge-tts>=7,<9" || true
+          else
+            "$HOME/lemo-opuscar/.venv/bin/python" -m pip install "edge-tts>=7,<9" || true
+          fi
+
+      - name: Check script and timeline
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/last-signal-6m"
+          node --check "$FILM/main.js"
+          "$HOME/lemo-opuscar/.venv/bin/python" - <<'PY'
+          import json
+          s=json.load(open('films/last-signal-6m/story.json'))
+          assert s['duration']==360 and s['fps']==24
+          assert len(s['shots'])==48
+          assert sum(a['duration'] for a in s['shots'])==360
+          assert all(a['t']==sum(b['duration'] for b in s['shots'][:i]) for i,a in enumerate(s['shots']))
+          assert len([a for a in s['shots'] if 'dialogue' in a])==23
+          print('Timeline: 48 distinct shots, six 60s acts, 23 Vietnamese dialogue lines')
+          PY
+
+      - name: Generate original Vietnamese character dialogue
+        run: |
+          set -euo pipefail
+          "$HOME/lemo-opuscar/.venv/bin/python" "$GITHUB_WORKSPACE/films/last-signal-6m/voice.py"
+
+      - name: Generate six-act cinematic retro-synth music and synchronized sound effects
+        run: |
+          set -euo pipefail
+          "$HOME/lemo-opuscar/.venv/bin/python" "$GITHUB_WORKSPACE/films/last-signal-6m/music.py"
+
+      - name: Mix dialogue, score and synchronized foley
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/last-signal-6m"
+          ffmpeg -y -loglevel error -i "$FILM/out/voice.wav" -i "$FILM/out/score.wav" \
+            -filter_complex "[0:a]volume=1.48,acompressor=threshold=-22dB:ratio=2.5:attack=22:release=180[v];[1:a]volume=0.62[m];[v][m]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.94,aresample=24000[out]" \
+            -map "[out]" -ar 24000 -ac 1 -c:a pcm_s16le "$FILM/out/mix.wav"
+          ffprobe -v error -show_entries format=duration:stream=codec_name,sample_rate,channels \
+            -of json "$FILM/out/mix.wav" | tee "$FILM/out/mix-probe.json"
+
+      - name: Render 16 diagnostic shots with real upstream Playwright engine
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/last-signal-6m"
+          cd "$HOME/lemo-opuscar"
+          node core/render/still.mjs "$FILM" \
+            1 9 27 36 65 87 109 136 160 191 213 231 255 285 310 352 \
+            --size 1280x720
+
+      - name: Render entire 360s film via Lemo-Opuscar core/render/video.mjs
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/last-signal-6m"
+          mkdir -p "$FILM/out"
+          cd "$HOME/lemo-opuscar"
+          node core/render/video.mjs "$FILM" \
+            --fps 24 --workers 4 --size 1280x720 \
+            --out "$FILM/out/picture.mp4"
+
+      - name: Verify original WAV and master picture with mixed soundtrack
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/last-signal-6m"
+          python3 - "$FILM/out/mix.wav" <<'PY'
+          import sys,wave
+          with wave.open(sys.argv[1],"rb") as f:
+              assert f.getnchannels()==1 and f.getframerate()==24000
+              assert abs(f.getnframes()/f.getframerate()-360)<.2
+              assert len(f.readframes(f.getnframes()))==f.getnframes()*f.getsampwidth()
+          print('Full 6-minute PCM timeline independently validated.')
+          PY
+          ffmpeg -hide_banner -v error -i "$FILM/out/mix.wav" -f null -
+          # upstream's mux.sh has incorrectly rejected some fully valid WAV files on this runner;
+          # use the shared upstream video render, but standard verified FFmpeg mastering.
+          ffmpeg -y -loglevel error -i "$FILM/out/picture.mp4" -i "$FILM/out/mix.wav" \
+            -filter_complex "[1:a]loudnorm=I=-14:TP=-1.2:LRA=11[a]" \
+            -map 0:v:0 -map "[a]" \
+            -c:v copy -c:a aac -b:a 192k \
+            -movflags +faststart -shortest \
+            "$FILM/out/master.mp4"
+
+      - name: Encode compact cinematic MP4 and export Vietnamese subtitles
+        run: |
+          set -euo pipefail
+          FILM="$GITHUB_WORKSPACE/films/last-signal-6m"
+          mkdir -p dist
+          ffmpeg -y -loglevel error -i "$FILM/out/master.mp4" \
+            -map 0:v:0 -map 0:a:0 \
+            -c:v libx264 -preset medium -crf 24 -maxrate 1850k -bufsize 3700k \
+            -pix_fmt yuv420p -r 24 -c:a aac -b:a 128k \
+            -movflags +faststart \
+            -metadata title="LỆNH CUỐI — LAST SIGNAL" \
+            -metadata comment="Original Vietnamese cel-animation film using upstream Lemo-Opuscar render" \
+            dist/last-signal-6m.mp4
+          cp "$FILM/out/last-signal.srt" dist/last-signal-6m.srt
+          ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate \
+            -of json dist/last-signal-6m.mp4 | tee dist/last-signal-6m-meta.json
+
+      - name: QC image diversity, dialogue, codec and poster
+        run: |
+          set -euo pipefail
+          "$HOME/lemo-opuscar/.venv/bin/python" - <<'PY'
+          from pathlib import Path
+          from PIL import Image,ImageOps,ImageStat,ImageDraw,ImageFont
+          import json,math
+          root=Path('films/last-signal-6m')
+          meta=json.loads(Path('dist/last-signal-6m-meta.json').read_text())
+          v=[s for s in meta['streams'] if s.get('codec_name')=='h264']
+          a=[s for s in meta['streams'] if s.get('codec_name')=='aac']
+          assert v and a,'Both H.264 video and AAC audio required'
+          assert v[0]['width']==1280 and v[0]['height']==720
+          assert v[0]['r_frame_rate']=='24/1'
+          duration=float(meta['format']['duration'])
+          assert abs(duration-360)<.4,duration
+          size=int(meta['format']['size'])
+          assert size<98*1024*1024, f'Final MP4 too large for GitHub: {size}'
+          voice=json.loads((root/'out/voice-report.json').read_text())
+          assert voice['duration']==360 and voice['total_lines']==23
+          srt=Path('dist/last-signal-6m.srt').read_text()
+          assert srt.count(' --> ')==23
+          stills=sorted((root/'stills').glob('t_*.jpg'),key=lambda p:float(p.stem[2:]))
+          assert len(stills)==16,(len(stills),stills)
+          board=Image.new('RGB',(1280,720),(11,19,35))
+          contrasts=[];brightness=[]
+          for i,p in enumerate(stills):
+              img=Image.open(p).convert('RGB')
+              stat=ImageStat.Stat(img.resize((160,90)))
+              contrast=sum(stat.stddev)/3
+              light=sum(stat.mean)/3
+              assert contrast>9,(p,contrast)
+              board.paste(ImageOps.fit(img,(320,180)),((i%4)*320,(i//4)*180))
+              contrasts.append(round(contrast,1));brightness.append(round(light,1))
+              print('QC frame',p.name,'contrast',round(contrast,1),'brightness',round(light,1))
+          board.save('dist/last-signal-contact-sheet.jpg',quality=90)
+          poster=Image.open(root/'stills/t_352.jpg').convert('RGB')
+          poster.save('dist/last-signal-poster.jpg',quality=95)
+          report={
+            'status':'PASS','duration_seconds':duration,'resolution':'1280x720',
+            'fps':24,'total_shots':48,'acts':6,'dialogues':23,
+            'voice_provider':voice['provider'],
+            'render':'upstream Lemo-Opuscar core/render/video.mjs',
+            'audio':'verified WAV, FFmpeg loudnorm master',
+            'poster':'last-signal-poster.jpg',
+            'scene_contrast':contrasts,'scene_brightness':brightness,
+            'video_bytes':size,
+            'limits':'Objective media checks and 16 visual stills; not a professional-animation certification'
+          }
+          Path('dist/last-signal-6m-qc.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print('FINAL QC PASS',json.dumps(report))
+          PY
+
+      - name: Upload finished film, poster, storyboard, subtitles and QC
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: last-signal-six-minute-film
+          path: |
+            dist/last-signal-6m.mp4
+            dist/last-signal-6m.srt
+            dist/last-signal-contact-sheet.jpg
+            dist/last-signal-poster.jpg
+            dist/last-signal-6m-meta.json
+            dist/last-signal-6m-qc.json
+            films/last-signal-6m/story.json
+            films/last-signal-6m/TREATMENT.md
+            films/last-signal-6m/CREDITS.md
+            films/last-signal-6m/out/voice-report.json
+            upstream-sha-last-signal.txt
+          retention-days: 30
+
+      - name: Publish validated final MP4 into GitHub repository
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/last-signal-6m.mp4 dist/last-signal-6m.srt \
+            dist/last-signal-contact-sheet.jpg dist/last-signal-poster.jpg \
+            dist/last-signal-6m-meta.json dist/last-signal-6m-qc.json
+          git commit -m "film(last-signal): publish verified six-minute Vietnamese cinematic action movie [skip ci]"
+          git push origin HEAD:main
