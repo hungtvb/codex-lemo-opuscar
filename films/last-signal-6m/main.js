@@ -228,6 +228,13 @@ function paint(st){
    lines(g,[[x,y],[x+range(-20,20),y+20]],'#91a9bd',2,.1);
   }
  }
+ // Original emergency signage is part of the painted background, not an overlay.
+ if(['street','alley','platform','garage','tower'].includes(st)){
+  const sign=st==='platform'?'GA VÂN ĐÔ':st==='tower'?'THÁP TRUNG TÂM':st==='garage'?'CỨU HỘ 07':st==='alley'?'LỐI THOÁT':'KHU SỐ 09';
+  g.save();g.font='bold 29px "DejaVu Sans",sans-serif';g.textAlign='center';
+  g.shadowColor=p[4];g.shadowBlur=17;g.fillStyle='#d7fff3';g.globalAlpha=.64;
+  g.fillText(sign,st==='platform'?350:1170,st==='tower'?205:270);g.restore();
+ }
  // Airbrush atmosphere
  for(let j=0;j<55;j++){
   let x=range(0,BW),y=range(0,BH);
@@ -527,6 +534,7 @@ function shotDraw(g,shot,local,t){
  if(camera==='crane')z=.81+u*.13,camY=12-u*50;
  if(camera==='wide'||camera==='overhead')z=.83+u*.07;
  if(camera==='low')z=1.08+u*.1;
+ if(['fight','kick','impact','leap','fall','dodge'].includes(ac) && u>.54) {z+=.20*ease(.54,.78,u);camX+=24*ease(.54,.82,u);}
  if(camera==='dutch')camX=-20+u*50;
  if(['shock','memory','silence','ending'].includes(ac)){z+=.015*Math.sin(t*.45);}
  let shake=0;
@@ -596,12 +604,12 @@ function shotDraw(g,shot,local,t){
 }
 function frameOverlay(g,shot,t,local){
  // correct CRT tape scanlines anchored to output pixels and cool edge darkening
- g.save();g.globalAlpha=.14;g.fillStyle='#080f1e';
+ g.save();g.globalAlpha=.085;g.fillStyle='#080f1e';
  for(let y=1;y<H;y+=3)g.fillRect(0,y,W,1);
  const vg=g.createRadialGradient(W/2,H/2,170,W/2,H/2,740);
- vg.addColorStop(0,'rgba(4,9,22,0)');vg.addColorStop(1,'rgba(2,5,15,.6)');
+ vg.addColorStop(0,'rgba(4,9,22,0)');vg.addColorStop(1,'rgba(2,5,15,.37)');
  g.globalAlpha=1;g.fillStyle=vg;g.fillRect(0,0,W,H);
- g.globalAlpha=.03;g.fillStyle='#91a3b1';
+ g.globalAlpha=.016;g.fillStyle='#91a3b1';
  for(let x=2;x<W;x+=7)g.fillRect(x,0,1,H);
  g.restore();
  // widescreen cinematic letterbox and HUD
